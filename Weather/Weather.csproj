@@ -1,11 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    <!-- reference that weather proto file 
+         and it will generate a server,
+         because the way gRPC work is you create a contract and 
+         you generate server/client code, and you just need to implement 
+         the part that matters
+    -->
+    <Protobuf Include="Protos\weather.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>

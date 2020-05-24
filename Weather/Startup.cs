@@ -17,6 +17,10 @@ namespace Weather
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
+            // tell the app to run the worker service
+            services.AddHostedService<WeatherWorker>();
+            services.AddHttpClient();
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,7 +35,7 @@ namespace Weather
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>();
+                endpoints.MapGrpcService<WeatherService>();
 
                 endpoints.MapGet("/", async context =>
                 {

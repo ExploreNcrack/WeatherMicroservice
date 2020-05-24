@@ -1,0 +1,39 @@
+// gRPC is contract-driven approach to RPC
+// this proto file is the  contract for the gRPC service
+syntax = "proto3";
+
+option csharp_namespace = "Weather";
+
+package Weather;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+// makea weather service
+// The Weather service definition.
+service Weather {
+  // Sends a greeting
+  //rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc GetWeatherStream(google.protobuf.Empty) returns (stream WeatherResponse){}
+  rpc GetWeather(google.protobuf.Empty) returns (WeatherResponse){}
+}
+
+// define the response type
+// we get to choose the actual service for our clients, 
+// make it relavant and not too much extreme data 
+message WeatherResponse {
+    string WeatherText = 1;
+    int32 WeatherIcon = 2;
+    string WeatherUri = 3;
+    bool IsDayTime = 4;
+    float Temperature = 5;
+    float RelativeHumidity = 6;
+    float WindSpeed = 7;
+    int32 UVIndex = 8;
+    float Pressure = 9;
+    float Past6HourMin = 10;
+    float Past6HourMax = 11;
+    google.protobuf.Timestamp RetrievedTime = 12;
+    string WindDirection = 13;
+    string Location = 14;
+}
